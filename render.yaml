@@ -1,0 +1,20 @@
+services:
+  - type: worker
+    name: telegram-membership-bot
+    runtime: python
+    plan: 0.5c-512mb
+    buildCommand: python3 -m unittest -v
+    startCommand: python3 -u membership_bot.py
+    disk:
+      name: membership-data
+      mountPath: /var/data
+      sizeGB: 1
+    envVars:
+      - key: BOT_TOKEN
+        sync: false
+      - key: GROUP_ID
+        sync: false
+      - key: CHANNEL_ID
+        sync: false
+      - key: BOT_DB
+        value: /var/data/membership.sqlite3

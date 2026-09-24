@@ -380,6 +380,7 @@ def main() -> None:
             with sqlite3.connect(config.database) as db:
                 bot = MembershipBot(api, config, db)
                 bot.validate_access()
+                LOG.info("Starting membership checks for group %s and channel %s", config.group_id, config.channel_id)
                 bot.run()
     except (ValueError, TelegramError) as exc:
         LOG.error("%s", exc)
