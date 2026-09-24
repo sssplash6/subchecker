@@ -31,6 +31,8 @@ The [Render Blueprint](render.yaml) creates one Python background worker with a 
 
 If you already created a Render service manually, set its type to **Background Worker**, runtime to **Python**, build command to `python3 -m unittest -v`, and start command to `python3 -u membership_bot.py`. Attach a persistent disk at `/var/data` and set the same four environment variables as the Blueprint. Run only one instance; Telegram long polling and this SQLite database are designed for one process.
 
+Render's default Python build command, `pip install -r requirements.txt`, also works: the checked-in file is intentionally empty because the bot has no third-party dependencies.
+
 If `getUpdates` reports a webhook conflict, remove the old webhook before starting this worker. If you use `--discover`, stop the worker first so two processes do not poll the same bot token.
 
 ## Behavior and limits
